@@ -37,6 +37,47 @@
 @media(max-width:800px){.gallery{grid-template-rows:repeat(3,minmax(0,190px))}.story-photo,.founder-photo{width:100%}.about-photo,.gravity-img{height:auto}}
 @media(max-width:480px){.gallery{grid-template-columns:1fr;grid-template-rows:none;grid-auto-rows:auto}.gallery .tall{grid-row:auto}.gallery img{height:auto;max-height:420px}.hero{background-position:center}}
 </style>
+<style>
+header {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+</style>
+
+<style>
+/* 一般內容圖片 */
+section img.uniform-image {
+    width: 100%;
+    height: 320px;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    border-radius: 8px;
+    background-color: #f5f2eb;
+    transition: transform 0.3s ease;
+}
+
+/* 平板版 */
+@media (max-width: 1024px) {
+    section img.uniform-image {
+        height: 280px;
+    }
+}
+
+/* 手機版 */
+@media (max-width: 768px) {
+    section img.uniform-image {
+        height: 240px;
+    }
+}
+</style>
 </head>
 <body>
 <header class="topbar"><a class="brand" href="#top">SHEN JI DISTILLERY<small>神跡酒造 · TAIWAN</small></a><nav class="nav" id="nav"><a href="#about">關於酒莊</a><a href="#story">品牌故事</a><a href="#founder">釀酒師</a><a href="#terroir">在地共生</a><a href="#gravity">釀造工藝</a><a href="#visit">酒莊體驗</a><a href="#collection">酒款介紹</a><a href="#audio-guide">語音導覽</a><a href="#contact">聯絡我們</a></nav><button class="menu" id="menu" aria-label="開啟選單">MENU</button></header>
@@ -101,5 +142,65 @@ document.querySelectorAll('img').forEach(function(img){
  const player=document.getElementById('guide-player');
  if(select&&player){select.addEventListener('change',function(){player.src='assets/audio/guide-'+select.value+'.mp3';player.load();});}
 })();
+</script>
+
+<!-- 返回頂端按鈕 -->
+<button id="backToTop" aria-label="返回頂端" title="返回頂端">
+    ↑
+</button>
+
+<style>
+#backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: #76674f;
+    color: white;
+    font-size: 26px;
+    cursor: pointer;
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+#backToTop.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#backToTop:hover {
+    background: #514635;
+    transform: translateY(-5px);
+}
+
+@media (max-width: 768px) {
+    #backToTop {
+        right: 15px;
+        bottom: 20px;
+        width: 42px;
+        height: 42px;
+    }
+}
+</style>
+
+<script>
+const topButton = document.getElementById("backToTop");
+
+window.addEventListener("scroll", function () {
+    topButton.classList.toggle("show", window.scrollY > 300);
+});
+
+topButton.addEventListener("click", function () {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
 </script>
 </body></html>
